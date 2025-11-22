@@ -1,13 +1,24 @@
+Here is your **full READY-TO-PASTE complete README.md**, containing your Step-1 to Step-5 at the top, followed by Steps-6 to Step-11 as continuation.
 
+You can just copy-paste this entire text into `README.md` 👇
 
+---
+
+```md
 # Getting Started with RISC-V on GitHub Codespaces
 
 Follow the steps below to set up and run programs in your own Codespace.
 
+
+---
+
 ## Step 1. Open the Repository
 
-Go to:
-[https://github.com/vsdip/vsd-riscv2](https://github.com/vsdip/vsd-riscv2)
+Go to:  
+https://github.com/vsdip/vsd-riscv2
+
+
+---
 
 ## Step 2. Create a Codespace
 
@@ -16,72 +27,105 @@ Go to:
 3. Select **Open with Codespaces** → **New codespace**.
 4. Wait while the environment builds. (First time may take 10–15 minutes.)
 
+
+---
+
 ## Step 3. Verify the Setup
 
 In the terminal that opens, type:
 
 ```
+
 riscv64-unknown-elf-gcc --version
 spike --version
 iverilog -V
+
 ```
 
 You should see version information for each tool.
 
+
+---
+
 ## Step 4. Run Your First Program
 
 1. Go to the `samples` folder.
-2. Compile the program:
 
-   ```
-   riscv64-unknown-elf-gcc -o sum1ton.o sum1ton.c
-   ```
-3. Run it with Spike:
+2. Compile:
 
-   ```
-   spike pk sum1ton.o
-   ```
+```
+
+riscv64-unknown-elf-gcc -o sum1ton.o sum1ton.c
+
+```
+
+3. Run using Spike:
+
+```
+
+spike pk sum1ton.o
+
+```
 
 Expected output:
 
 ```
+
 Sum from 1 to 9 is 45
-```
+
+````
+
+
+---
 
 ## Step 5. Next Steps
 
-* You can edit and run your own C programs.
+* Try editing the C programs.
+* Try creating your own C programs.
 * You can also try Verilog programs using `iverilog`.
 
-### Step 6. Open the noVNC Desktop
 
-1. In your Codespace window, click on the **PORTS** tab.  
-2. Look for the entry **noVNC Desktop (6080)** and click the **Forwarded Address** link.
-
-   ![noVNC port](images/2.png)
-
-3. A new browser tab will open with a directory listing. Click on `vnc_lite.html`.
-
-   ![noVNC directory](images/3.png)
-
-4. You should now see a Linux desktop in your browser.
-
-   ![XFCE desktop](images/4.png)
 
 ---
 
-### Step 7. Open a Terminal Inside the Desktop
+# GUI Desktop + RISC-V Flow using noVNC (Advanced)
 
-1. On the desktop, **right-click** anywhere on the background.  
-2. Select **“Open Terminal Here”** from the menu to launch a terminal window.
-
-   ![Open terminal](images/4.png)
+Below steps help you work inside a full Linux GUI desktop inside Codespaces
 
 ---
 
-### Step 8. Navigate to the Sample Programs
+## Step 6. Launch the noVNC Desktop
 
-In the terminal, move to the Codespace workspace and open the `samples` folder:
+1. Open the **PORTS** tab in Codespaces  
+2. Look for **noVNC Desktop (6080)**  
+3. Click the link under **Forwarded Address**
+
+   ![port forward](images/port_forward.png)
+
+4. Click on **vnc_lite.html** when the browser tab opens
+
+   ![vnc dir](images/vnc_dir.png)
+
+5. The Linux Desktop will open
+
+   ![desktop](images/desktop.png)
+
+
+---
+
+## Step 7. Open Terminal inside Desktop
+
+1. Right-click anywhere on Desktop  
+2. Click **Open Terminal Here**
+
+   ![open terminal](images/open_terminal.png)
+
+
+---
+
+## Step 8. Navigate to Samples Folder
+
+Inside the terminal:
 
 ```bash
 cd /workspaces/vsd-riscv2
@@ -89,78 +133,73 @@ cd samples
 ls -ltr
 ````
 
-You should see files like `sum1ton.c`, `1ton_custom.c`, `load.S`, and `Makefile`.
+Expected:
 
-![samples folder](images/5.png)
+![samples](images/samples.png)
 
 ---
 
-### Step 9. Compile and Run Using Native GCC
-
-First, compile and run the C program with the standard `gcc` compiler:
+## Step 9. Compile Using Native GCC (x86)
 
 ```bash
 gcc sum1ton.c
 ./a.out
 ```
 
-You should see an output similar to:
+Expected output:
 
-```text
+```
 Sum from 1 to 9 is 45
 ```
 
-![gcc run](images/6.png)
+![native run](images/native.png)
 
 ---
 
-### Step 10. Compile and Run on the RISC-V Toolchain
-
-Now compile the same program for RISC-V and run it on the Spike ISA simulator:
+## Step 10. Compile Using RISC-V GCC & Run with Spike
 
 ```bash
 riscv64-unknown-elf-gcc -o sum1ton.o sum1ton.c
 spike pk sum1ton.o
 ```
 
-You will see the proxy kernel (`pk`) and then the same program output:
+Expected:
 
-```text
-bbl loader
-Sum from 1 to 9 is 45
-```
-
-![spike run](images/7.png)
+![spike run](images/spike.png)
 
 ---
 
-### Step 11. Edit the C Program in a GUI Editor
+## Step 11. Modify Code Using GUI Editor
 
-To edit the program using a graphical editor:
+Open editor:
 
 ```bash
 gedit sum1ton.c &
 ```
 
-This opens `sum1ton.c` in **gedit** on the noVNC desktop.
-Modify the code (for example, change the range of the sum), save the file, and then re-run:
+![gedit](images/gedit.png)
+
+Then re-compile & run again:
 
 ```bash
 riscv64-unknown-elf-gcc -o sum1ton.o sum1ton.c
 spike pk sum1ton.o
 ```
 
-![gedit edit](images/8.png)
+---
 
-You have now:
+# You Are Now Ready 🎯
 
-* Opened a full Linux desktop inside GitHub Codespaces
-* Compiled and executed a C program with native GCC
-* Compiled and executed the same program on a RISC-V target using Spike
-* Edited and re-built the code using a GUI editor over noVNC
+You now know how to:
+
+✔ open GUI desktop
+✔ open terminal
+✔ compile using gcc
+✔ compile using riscv-gcc
+✔ run on Spike
+✔ edit using GUI editor
+
+You are ready to explore further 🚀
 
 ```
-```
-
-
 
